@@ -1,9 +1,10 @@
 package io.nuun.plugin.configuration.common;
 
+import static io.nuun.kernel.core.NuunCore.createKernel;
+import static io.nuun.kernel.core.NuunCore.newKernelConfiguration;
 import static org.fest.assertions.Assertions.assertThat;
+import io.nuun.kernel.api.Kernel;
 import io.nuun.kernel.api.plugin.AbstractPlugin;
-import io.nuun.kernel.core.Kernel;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,9 +19,14 @@ public class NuunCommonConfigurationPluginTest
     @BeforeClass
     public static void init()
     {
-        Kernel kernel = Kernel.createKernel(Kernel.NUUN_ROOT_PACKAGE , NuunCommonConfigurationPluginTest.class.getPackage().getName() )
-                .withPlugins(
-                        
+        
+        Kernel kernel = createKernel(
+                //
+                newKernelConfiguration() //
+                .params( //
+                        Kernel.NUUN_ROOT_PACKAGE , NuunCommonConfigurationPluginTest.class.getPackage().getName()
+                        ) //
+                .plugins(
                         new AbstractPlugin()
                         {
                             
@@ -30,10 +36,12 @@ public class NuunCommonConfigurationPluginTest
                                 return "internal plugin";
                             }
                             
+                            @Override
                             public String pluginPackageRoot() {
                                 return NuunCommonConfigurationPluginTest.class.getPackage().getName();
                             };
                             
+                            @Override
                             public Object dependencyInjectionDef() {
                                 
                                 return new AbstractModule()
@@ -51,7 +59,8 @@ public class NuunCommonConfigurationPluginTest
                         )
                 
                 
-                .build();
+                );
+        
         
         kernel.init();
         kernel.start();
@@ -65,8 +74,8 @@ public class NuunCommonConfigurationPluginTest
     {
         Holder holder = injector.getInstance(Holder.class);
 
-//        
-//        
+//
+//
 //        assertThat(holder.moduleAnno).isNotNull();
 //        assertThat(holder.moduleAnno).isEqualTo("Hi!");
         

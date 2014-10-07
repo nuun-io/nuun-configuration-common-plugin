@@ -16,9 +16,9 @@
  */
 package io.nuun.plugin.configuration.common;
 
-import io.nuun.kernel.api.plugin.AbstractPlugin;
 import io.nuun.kernel.api.plugin.InitState;
 import io.nuun.kernel.api.plugin.context.InitContext;
+import io.nuun.kernel.core.AbstractPlugin;
 import io.nuun.kernel.spi.configuration.NuunBaseConfigurationPlugin;
 
 import java.util.ArrayList;

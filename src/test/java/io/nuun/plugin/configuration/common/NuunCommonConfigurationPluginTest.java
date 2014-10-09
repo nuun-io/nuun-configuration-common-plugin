@@ -4,6 +4,7 @@ import static io.nuun.kernel.core.NuunCore.createKernel;
 import static io.nuun.kernel.core.NuunCore.newKernelConfiguration;
 import static org.fest.assertions.Assertions.assertThat;
 import io.nuun.kernel.api.Kernel;
+import io.nuun.kernel.api.di.UnitModule;
 import io.nuun.kernel.core.AbstractPlugin;
 
 import org.junit.BeforeClass;
@@ -43,7 +44,7 @@ public class NuunCommonConfigurationPluginTest
                             };
                             
                             @Override
-                            public Object dependencyInjectionDef() {
+                            public Object nativeUnitModule() {
                                 
                                 return new AbstractModule()
                                 {
@@ -66,7 +67,7 @@ public class NuunCommonConfigurationPluginTest
         kernel.init();
         kernel.start();
         
-        injector = kernel.getObjectGraph().as(Injector.class);
+        injector = kernel.objectGraph().as(Injector.class);
     }
     
     

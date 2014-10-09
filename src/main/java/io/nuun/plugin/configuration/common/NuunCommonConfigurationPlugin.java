@@ -16,6 +16,7 @@
  */
 package io.nuun.plugin.configuration.common;
 
+import io.nuun.kernel.api.di.UnitModule;
 import io.nuun.kernel.api.plugin.InitState;
 import io.nuun.kernel.api.plugin.context.InitContext;
 import io.nuun.kernel.core.AbstractPlugin;
@@ -70,7 +71,7 @@ public class NuunCommonConfigurationPlugin extends AbstractPlugin implements Nuu
     
     
     @Override
-    public Module dependencyInjectionDef()
+    public Object nativeUnitModule()
     {
         if (module == null )
         {
